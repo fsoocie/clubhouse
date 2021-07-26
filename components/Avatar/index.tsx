@@ -9,12 +9,16 @@ interface AvatarProps {
   height: string;
   className?: string;
   isVoice?: boolean;
+  letters: string
 }
 
-export const Avatar: React.FC<AvatarProps> = ({ src, width, height, className, isVoice }) => {
+export const Avatar: React.FC<AvatarProps> = ({ src, width, height, className, isVoice, letters }) => {
+  console.log(letters)
   return (
     <div
-      style={{ width, height, backgroundImage: `url(${src})` }}
-      className={clsx(styles.avatar, isVoice ? styles.avatarBorder : '', className, 'd-ib')}></div>
+      style={{ width, height, backgroundImage: src ? `url(${src})` : '' }}
+      className={clsx(styles.avatar, isVoice && styles.avatarBorder, !src && styles.avatarEmpty, className, 'd-ib', 'mb-10')}>
+        {src ? null : letters}
+      </div>
   );
 };

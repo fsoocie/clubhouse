@@ -9,6 +9,15 @@
   box-shadow: 0 0 0 4px #e5e0d0;
 }
 
+.avatarEmpty {
+  background-color: gray;
+  font-size: 34px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
 .mask {
   position: absolute;
 }

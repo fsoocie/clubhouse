@@ -16,16 +16,20 @@ type InputValueState = {
 export const EnterPhoneStep = () => {
   const { onNextStep, setFieldValue } = React.useContext(MainContext);
   const [values, setValues] = React.useState<InputValueState>({} as InputValueState);
+  const [loading, setLoading] = React.useState(false);
 
   const nextDisabled = !values.formattedValue || values.formattedValue.includes('_');
 
   const onSubmit = async () => {
     try {
+      setLoading(true)
       await Axios.get(`/auth/sms?phone=${values.value}`,);
       setFieldValue('phone', values.value);
       onNextStep();
     } catch (error) {
       console.warn('Ошибка при отправке СМС', error);
+    } finally {
+      setLoading(false)
     }
   };
 
@@ -49,9 +53,13 @@ export const EnterPhoneStep = () => {
             onValueChange={({ formattedValue, value }) => setValues({ formattedValue, value })}
           />
         </div>
-        <Button disabled={nextDisabled} onClick={onSubmit}>
-          Next
-          <img className="d-ib ml-10" src="/static/arrow.svg" />
+        <Button disabled={loading || nextDisabled} onClick={onSubmit}>
+          {
+            loading ? "Loading..." : <>
+               Next
+               <img className="d-ib ml-10" src="/static/arrow.svg" />
+            </>
+          }
         </Button>
         <p className={clsx(styles.policyText, 'mt-30')}>
           By entering your number, you’re agreeing to our Terms of Service and Privacy Policy.
