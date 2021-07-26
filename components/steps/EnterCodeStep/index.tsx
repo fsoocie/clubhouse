@@ -24,16 +24,21 @@ export const EnterCodeStep = () => {
     });
     if (event.target.nextSibling) {
       (event.target.nextSibling as HTMLInputElement).focus();
+    } else {
+      onSubmit([...codes, value].join(''));
     }
+
   };
 
-  const onSubmit = async () => {
+  const onSubmit = async (code: string) => {
     try {
       setIsLoading(true);
-      await Axios.get('/todos');
+      await Axios.get(`/auth/activate?code=${code}`);
+
       router.push('/rooms');
     } catch (error) {
       alert('Ошибка при активации!');
+      setCodes(['', '', '', '']);
     }
 
     setIsLoading(false);

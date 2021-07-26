@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1202f200-e950-444b-a2b0-b102e8ff4ed9" name="Default Changelist" comment="" />
+    <list default="true" id="1202f200-e950-444b-a2b0-b102e8ff4ed9" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/clubhouse-clone.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -33,6 +41,7 @@
       <updated>1626882123048</updated>
       <workItem from="1626882127325" duration="13000" />
       <workItem from="1626882241590" duration="505000" />
+      <workItem from="1626943104378" duration="6000" />
     </task>
     <servers />
   </component>

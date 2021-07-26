@@ -8,8 +8,9 @@ import React from 'react';
 import { MainContext } from '../../../pages';
 
 export const EnterNameStep = () => {
-  const [inputValue, setInputValue] = React.useState<string>('');
-  const { onNextStep } = React.useContext(MainContext);
+  const { onNextStep, userData } = React.useContext(MainContext);
+
+  const [inputValue, setInputValue] = React.useState<string>(userData.username || '');
 
   const nextDisabled = !inputValue;
 

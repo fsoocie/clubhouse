@@ -4,7 +4,7 @@ import NumberFormat from 'react-number-format';
 import { WhiteBlock } from '../../WhiteBlock';
 import { Button } from '../../Button';
 import { StepInfo } from '../../StepInfo';
-
+import Axios from '../../../core/axios'
 import styles from './EnterPhoneStep.module.scss';
 import { MainContext } from '../../../pages';
 
@@ -14,10 +14,21 @@ type InputValueState = {
 };
 
 export const EnterPhoneStep = () => {
-  const { onNextStep } = React.useContext(MainContext);
+  const { onNextStep, setFieldValue } = React.useContext(MainContext);
   const [values, setValues] = React.useState<InputValueState>({} as InputValueState);
 
   const nextDisabled = !values.formattedValue || values.formattedValue.includes('_');
+
+  const onSubmit = async () => {
+    try {
+      await Axios.get(`/auth/sms?phone=${values.value}`,);
+      setFieldValue('phone', values.value);
+      onNextStep();
+    } catch (error) {
+      console.warn('Ошибка при отправке СМС', error);
+    }
+  };
+
 
   return (
     <div className={styles.block}>
@@ -38,7 +49,7 @@ export const EnterPhoneStep = () => {
             onValueChange={({ formattedValue, value }) => setValues({ formattedValue, value })}
           />
         </div>
-        <Button disabled={nextDisabled} onClick={onNextStep}>
+        <Button disabled={nextDisabled} onClick={onSubmit}>
           Next
           <img className="d-ib ml-10" src="/static/arrow.svg" />
         </Button>

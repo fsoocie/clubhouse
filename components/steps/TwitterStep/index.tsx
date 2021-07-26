@@ -4,11 +4,27 @@ import { Button } from '../../Button';
 import { StepInfo } from '../../StepInfo';
 
 import styles from './TwitterStep.module.scss';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { MainContext } from '../../../pages';
+import Cookie from "js-cookie"
 
 export const TwitterStep: React.FC = () => {
-  const { onNextStep } = React.useContext(MainContext);
+  const { onNextStep, setUserData } = React.useContext(MainContext);
+  const onClickAuth = () => {
+    const windowFeatures = "menubar=no,location=no,resizable=no,scrollbars=no,status=no,width:500,height:500"
+    window.open("http://localhost:3001/auth/github", "GitHubAuth", windowFeatures)
+  }
+
+  useEffect(() => {
+    window.addEventListener("message", ({ data }) => {
+      if (data.hasOwnProperty("avatarUrl")) {
+        Cookie.remove("token");
+        Cookie.set("token", data.token)
+        setUserData(data)
+        onNextStep()
+      }
+    })
+  }, [])
 
   return (
     <div className={styles.block}>
@@ -30,9 +46,9 @@ export const TwitterStep: React.FC = () => {
           </svg>
         </div>
         <h2 className="mb-40">Archakov Dennis</h2>
-        <Button onClick={onNextStep}>
+        <Button onClick={onClickAuth}>
           <img src="/static/twitter.svg" alt="Twitter logo" className={styles.twitterLogo} />
-          Import from Twitter
+          Import from Github
           <img className="d-ib ml-10" src="/static/arrow.svg" />
         </Button>
         <div className="link mt-20 cup d-ib">Enter my info manually</div>
